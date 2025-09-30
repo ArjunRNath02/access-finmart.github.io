@@ -92,14 +92,6 @@ const Navbar = () => {
                 </Link>
               );
             })}
-
-            <Link
-              href="/apply"
-              className="block bg-blue-900 text-center text-white px-5 py-2 rounded-full shadow-lg hover:bg-blue-600 hover:shadow-xl transition-all"
-              onClick={() => setMobileOpen(false)}
-            >
-              Apply Now
-            </Link>
           </motion.div>
         )}
       </AnimatePresence>
