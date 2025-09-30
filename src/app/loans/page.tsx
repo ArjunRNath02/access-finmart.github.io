@@ -9,19 +9,14 @@ import LoanFilters from "@/components/loans/LoanFilters";
 import { Home, Building2, User, Globe, GraduationCap, Briefcase } from "lucide-react";
 import { useRouter } from "next/navigation";
 
-type PageType = "home" | "emi-calculator" | "explore-loans" | "contact";
 
-interface LoansPageProps {
-  onNavigate: (page: PageType) => void;
-}
-
-export default function LoansPage({ onNavigate }: LoansPageProps) {
+export default function LoanPage() {
   const router = useRouter();
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
 
   const loanTypes = [
-     {
+    {
       id: 'home',
       title: 'Home Loans',
       description: 'Purchase your dream home with competitive interest rates and flexible repayment options.',
@@ -131,13 +126,13 @@ export default function LoansPage({ onNavigate }: LoansPageProps) {
 
         {/* Loan Grid */}
         {filteredLoans.length > 0 ? (
-          <LoanGrid loans={filteredLoans} onNavigate={onNavigate} />
+          <LoanGrid loans={filteredLoans} onNavigate={(page) => router.push(`/${page}`)} />
         ) : (
           <NoResults />
         )}
 
         {/* Bottom CTA */}
-        <LoanCTA onNavigate={(page) => router.push(`/${page === "emi-calculator" ? "emi-calculator" : page}`)}/>
+        <LoanCTA onNavigate={(page) => router.push(`/${page === "emi-calculator" ? "emi-calculator" : page}`)} />
       </div>
     </div>
   );
