@@ -2,9 +2,11 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LucideHandCoins, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
+import Image from "next/image";
+import { images } from "@/constants/images";
 
 const Navbar = () => {
   const pathname = usePathname();
@@ -19,39 +21,41 @@ const Navbar = () => {
 
   return (
     <header className="sticky top-0 z-50 w-full backdrop-blur-md">
-      <nav className="w-full flex items-center justify-between px-6 py-4">
+      <nav className="w-full flex items-center justify-between px-6 py-3">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-2 group">
-          <LucideHandCoins
-            size={34}
-            className="text-blue-900 group-hover:scale-110 transition-transform"
+          <Image
+            src={images.logo}
+            className="size-12 group-hover:scale-110 transition-transform"
+            alt="Logo"
           />
-          <span className="font-extrabold text-2xl bg-gradient-to-r from-violet-900 via-violet-600 to-blue-900 bg-clip-text text-transparent group-hover:opacity-80">
+          <span className="font-extrabold text-2xl bg-gradient-to-r from-blue-700 via-violet-900 to-blue-700 bg-clip-text text-transparent group-hover:opacity-80">
             Access Finmart
           </span>
         </Link>
 
         {/* Desktop Links */}
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden md:flex items-center gap-4 relative">
           {links.map((link) => {
             const isActive = pathname === link.href;
             return (
               <Link
                 key={link.href}
                 href={link.href}
-                className={`relative px-3 py-2 rounded-md font-medium transition-colors ${isActive
-                    ? "text-blue-100 bg-blue-900"
-                    : "text-gray-800 hover:text-blue-600 hover:bg-blue-300"
-                  }`}
+                className={`relative px-4 py-2 rounded-md font-medium transition-colors ${
+                  isActive
+                    ? "bg-blue-800 text-gray-200"
+                    : "text-gray-800 hover:text-blue-700"
+                }`}
               >
-                {link.label}
                 {isActive && (
-                  <motion.span
-                    layoutId="underline"
-                    className="absolute left-0 right-0 bottom-0 h-[2px] bg-blue-600 rounded"
+                  <motion.div
+                    layoutId="activeBackground"
+                    className="absolute inset-0 rounded-md bg-blue-800"
                     transition={{ type: "spring", stiffness: 500, damping: 30 }}
                   />
                 )}
+                <span className="relative z-10">{link.label}</span>
               </Link>
             );
           })}
@@ -66,7 +70,7 @@ const Navbar = () => {
         </button>
       </nav>
 
-      {/* Mobile Drawer (Overlay) */}
+      {/* Mobile Drawer */}
       <AnimatePresence>
         {mobileOpen && (
           <>
@@ -111,10 +115,11 @@ const Navbar = () => {
                     >
                       <Link
                         href={link.href}
-                        className={`block text-lg font-medium ${isActive
-                            ? "text-blue-900"
-                            : "text-gray-700 hover:text-blue-600"
-                          }`}
+                        className={`relative block px-4 py-2 rounded-md text-lg font-medium ${
+                          isActive
+                            ? "bg-blue-800 text-gray-200"
+                            : "text-gray-800 hover:text-blue-700 hover:bg-blue-100"
+                        }`}
                         onClick={() => setMobileOpen(false)}
                       >
                         {link.label}

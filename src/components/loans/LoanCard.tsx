@@ -4,8 +4,8 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { CheckCircle } from "lucide-react";
+import Image from "next/image";
 
 interface LoanCardProps {
   loan: any;
@@ -14,58 +14,58 @@ interface LoanCardProps {
 }
 
 export default function LoanCard({ loan, index }: LoanCardProps) {
-  const getColorClasses = (color: string) => {
-    const colors: { [key: string]: { bg: string; text: string; border: string } } = {
-      blue: { bg: "bg-blue-50", text: "text-blue-600", border: "border-blue-200" },
-      green: { bg: "bg-green-50", text: "text-green-600", border: "border-green-200" },
-      purple: { bg: "bg-purple-50", text: "text-purple-600", border: "border-purple-200" },
-      orange: { bg: "bg-orange-50", text: "text-orange-600", border: "border-orange-200" },
-      indigo: { bg: "bg-indigo-50", text: "text-indigo-600", border: "border-indigo-200" },
-      red: { bg: "bg-red-50", text: "text-red-600", border: "border-red-200" },
-    };
-    return colors[color] || colors.blue;
-  };
-
-  const colorClasses = getColorClasses(loan.color);
-  const Icon = loan.icon; 
+  const Icon = loan.icon;
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 40 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
     >
-      <Card className="h-full hover:shadow-xl transition-all duration-300 border-0 shadow-lg">
-        <CardHeader className={`${colorClasses.bg} ${colorClasses.border} border-b`}>
-          <div className="flex items-center justify-between">
-            <div className={`w-12 h-12 ${colorClasses.bg} rounded-lg flex items-center justify-center`}>
-              <Icon className={`w-6 h-6 ${colorClasses.text}`} /> {/* ✅ works now */}
-            </div>
-            <Badge variant="secondary" className={`${colorClasses.text} bg-white`}>
-              {loan.interestRate}
-            </Badge>
+      <Card className="h-full border-0 shadow-lg rounded-2xl hover:shadow-2xl hover:scale-105 transition-transform duration-300 overflow-hidden">
+        
+        {/* Banner Image */}
+        <div className="relative h-48 w-full">
+          <Image
+            src={loan.banner}
+            alt={loan.title}
+            fill
+            className="object-cover rounded-t-2xl"
+          />
+          <div className="absolute top-3 left-3 p-2 bg-white/80 backdrop-blur-md rounded-full shadow">
+            <Icon className="w-6 h-6 text-blue-700" />
           </div>
-          <CardTitle className="text-xl text-gray-900 mt-4">{loan.title}</CardTitle>
+        </div>
+
+        {/* Card Header */}
+        <CardHeader className="pt-4 pb-2 px-6 border-b">
+          <CardTitle className="text-lg md:text-xl font-bold text-gray-900">
+            {loan.title}
+          </CardTitle>
         </CardHeader>
-        <CardContent className="p-6 space-y-6">
+
+        {/* Card Content */}
+        <CardContent className="px-6 py-4 space-y-4">
           <p className="text-gray-600 leading-relaxed">{loan.description}</p>
 
-          <div className="space-y-3">
-            <div className="flex justify-between items-center">
+          {/* Loan Details */}
+          <div className="flex flex-col md:flex-row md:justify-between gap-2 md:gap-4">
+            <div className="flex justify-between items-center bg-gray-50 p-2 rounded-lg">
               <span className="text-sm text-gray-500">Max Amount:</span>
               <span className="font-semibold text-gray-900">{loan.maxAmount}</span>
             </div>
-            <div className="flex justify-between items-center">
+            <div className="flex justify-between items-center bg-gray-50 p-2 rounded-lg">
               <span className="text-sm text-gray-500">Interest Rate:</span>
               <span className="font-semibold text-gray-900">{loan.interestRate}</span>
             </div>
           </div>
 
+          {/* Features */}
           <div className="space-y-2">
             <h4 className="font-semibold text-gray-900 text-sm">Key Features:</h4>
             <ul className="space-y-1">
               {loan.features.map((feature: string, idx: number) => (
-                <li key={idx} className="flex items-center space-x-2 text-sm text-gray-600">
+                <li key={idx} className="flex items-center space-x-2 text-sm text-gray-700">
                   <CheckCircle className="w-4 h-4 text-green-500 flex-shrink-0" />
                   <span>{feature}</span>
                 </li>
