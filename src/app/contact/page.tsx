@@ -37,7 +37,7 @@ const contactInfo = [
   {
     icon: MapPin,
     title: "Address",
-    details: ["P.G BUILDING, APSARA JUNCTION", "Cherthala, Kerala, India"],
+    details: ["","HQ: FIRST FLOOR, VYAPARA BHAVAN, Palarivattom Junction, Palarivattom", "Ernakulam, Kerala","BRANCH: P.G BUILDING, APSARA JUNCTION, Cherthala, Kerala"],
   },
   {
     icon: Clock,

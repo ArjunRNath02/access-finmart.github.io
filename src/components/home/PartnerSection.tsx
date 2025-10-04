@@ -19,9 +19,7 @@ export function PartnerSection() {
   const container: Variants = {
     hidden: {},
     visible: {
-      transition: {
-        staggerChildren: 0.12,
-      },
+      transition: { staggerChildren: 0.1 },
     },
   };
 
@@ -30,34 +28,34 @@ export function PartnerSection() {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { type: "spring", stiffness: 120, damping: 16 },
+      transition: { duration: 0.5, ease: "easeOut" },
     },
-    hover: { scale: 1.08 },
+    hover: { scale: 1.05, transition: { duration: 0.3 } },
   };
 
   return (
-    <section className="py-20 border-t border-gray-200 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-20">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
-          className="text-center mb-16"
+          className="text-center mb-14"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
+          transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4">
-            Trusted by Leading Banks
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
+            Trusted by India’s Leading Banks
           </h2>
-          <p className="text-gray-600 text-lg md:text-xl max-w-2xl mx-auto">
-            We have established partnerships with major banks to ensure your
-            loan portfolio meets their specific requirements.
+          <p className="text-gray-500 text-lg mt-3 max-w-2xl mx-auto">
+            Our partnerships with top banks ensure that you always get
+            transparent, reliable, and competitive loan solutions.
           </p>
         </motion.div>
 
         {/* Partners Grid */}
         <motion.div
-          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-8 gap-8 items-center"
+          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-x-10 gap-y-12 place-items-center"
           variants={container}
           initial="hidden"
           whileInView="visible"
@@ -68,14 +66,17 @@ export function PartnerSection() {
               key={partner.name}
               variants={item}
               whileHover="hover"
-              className="flex flex-col items-center space-y-3 cursor-pointer"
+              className="flex flex-col items-center space-y-3 group"
             >
-              <div className="w-20 h-20 bg-gradient-to-br from-blue-100 via-white to-blue-50 rounded-full flex items-center justify-center shadow-md hover:shadow-xl transition-all duration-300">
-                <span className="text-sm font-bold text-gray-700 hover:text-blue-600 transition-colors">
+              {/* Logo Badge */}
+              <div className="w-24 h-24 flex items-center justify-center rounded-xl border border-gray-200 bg-gray-50 group-hover:border-blue-500 transition">
+                <span className="text-lg font-bold text-gray-500 group-hover:text-blue-600 transition-colors">
                   {partner.logo}
                 </span>
               </div>
-              <span className="font-semibold text-center text-gray-800 text-sm md:text-base leading-snug">
+
+              {/* Bank Name */}
+              <span className="text-sm font-medium text-gray-700 group-hover:text-blue-600 transition">
                 {partner.name}
               </span>
             </motion.div>

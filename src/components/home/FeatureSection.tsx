@@ -18,127 +18,103 @@ const features = [
     icon: Users,
     title: "Expert Guidance",
     description:
-      "Certified financial professionals with years of banking experience guide you through every step.",
-    color: "blue",
+      "Certified professionals with years of banking experience guide you through every step.",
+    gradient: "from-blue-500 to-indigo-500",
   },
   {
     icon: Shield,
     title: "Legal & Technical Support",
     description:
-      "Complete documentation support ensuring all legal and technical requirements are met.",
-    color: "green",
+      "Complete documentation support ensuring legal and technical requirements are met.",
+    gradient: "from-green-500 to-emerald-500",
   },
   {
     icon: Clock,
     title: "Quick Processing",
     description:
-      "Fast-track your loan portfolio preparation with our streamlined processes and expert team.",
-    color: "purple",
+      "Fast-track your loan portfolio with our streamlined processes and expert team.",
+    gradient: "from-purple-500 to-pink-500",
   },
   {
     icon: HeartHandshake,
     title: "Personalized Service",
     description:
-      "Tailored solutions based on your specific loan requirements and financial goals.",
-    color: "orange",
+      "Tailored solutions based on your unique loan requirements and goals.",
+    gradient: "from-orange-500 to-amber-500",
   },
   {
     icon: FileCheck,
     title: "Complete Documentation",
     description:
-      "End-to-end documentation service covering all aspects of loan portfolio preparation.",
-    color: "red",
+      "End-to-end service covering every aspect of your loan portfolio.",
+    gradient: "from-red-500 to-rose-500",
   },
   {
     icon: TrendingUp,
     title: "High Success Rate",
     description:
-      "98% approval rate with our meticulously prepared loan portfolios and bank relationships.",
-    color: "teal",
+      "98% approval rate with our meticulously prepared portfolios.",
+    gradient: "from-teal-500 to-cyan-500",
   },
   {
     icon: Award,
     title: "Quality Assurance",
     description:
-      "Multiple quality checks and reviews to ensure your portfolio meets the highest standards.",
-    color: "indigo",
+      "Rigorous reviews to ensure your portfolio meets the highest standards.",
+    gradient: "from-indigo-500 to-violet-500",
   },
   {
     icon: Phone,
     title: "24/7 Support",
     description:
-      "Round-the-clock customer support to address any queries during the preparation process.",
-    color: "pink",
+      "Always-on customer support for any queries during the process.",
+    gradient: "from-pink-500 to-fuchsia-500",
   },
 ];
 
+
+const stepVariants: Variants = { hidden: { opacity: 0, scale: 0.8 }, visible: { opacity: 1, scale: 1, transition: { type: "spring", stiffness: 120, damping: 16 } }, hover: { scale: 1.05 }, };
+
+
 export function FeatureSection() {
-  const getColorClasses = (color: string) => {
-    const colors: { [key: string]: string } = {
-      blue: "bg-gradient-to-tr from-blue-100 to-blue-50 text-blue-600",
-      green: "bg-gradient-to-tr from-green-100 to-green-50 text-green-600",
-      purple: "bg-gradient-to-tr from-purple-100 to-purple-50 text-purple-600",
-      orange: "bg-gradient-to-tr from-orange-100 to-orange-50 text-orange-600",
-      red: "bg-gradient-to-tr from-red-100 to-red-50 text-red-600",
-      teal: "bg-gradient-to-tr from-teal-100 to-teal-50 text-teal-600",
-      indigo: "bg-gradient-to-tr from-indigo-100 to-indigo-50 text-indigo-600",
-      pink: "bg-gradient-to-tr from-pink-100 to-pink-50 text-pink-600",
-    };
-    return colors[color] || colors.blue;
-  };
-
-  const cardVariants: Variants = {
-    hidden: { opacity: 0, y: 40, scale: 0.95 },
-    visible: { opacity: 1, y: 0, scale: 1, transition: { type: "spring", stiffness: 120, damping: 16 } },
-    hover: { scale: 1.05, y: -5 },
-  };
-
-  const stepVariants: Variants = {
-    hidden: { opacity: 0, scale: 0.8 },
-    visible: { opacity: 1, scale: 1, transition: { type: "spring", stiffness: 120, damping: 16 } },
-    hover: { scale: 1.05 },
-  };
-
   return (
-    <section className="py-20 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
+    <section className="py-24">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        
+        {/* Header */}
         <motion.div
-          className="text-center mb-16"
+          className="text-center mb-20"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
         >
-          <h2 className="text-3xl lg:text-4xl font-extrabold text-gray-900 mb-4">
+          <h2 className="text-4xl font-extrabold text-gray-900 mb-4">
             Why Choose AccessFinmart?
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            We provide comprehensive loan portfolio preparation services with expert guidance, ensuring your success with banks.
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            We provide comprehensive loan portfolio preparation services 
+            with expert guidance, ensuring your success with banks.
           </p>
         </motion.div>
 
-        {/* Feature Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {features.map((feature, index) => (
+        {/* Features */}
+        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
+          {features.map((f, i) => (
             <motion.div
-              key={feature.title}
-              variants={cardVariants}
-              initial="hidden"
-              whileInView="visible"
-              whileHover="hover"
-              transition={{ delay: index * 0.1 }}
-              className="bg-white rounded-xl p-6 shadow-md border hover:shadow-lg cursor-pointer"
+              key={f.title}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              whileHover={{ scale: 1.05 }}
+              transition={{ delay: i * 0.05, type: "spring", stiffness: 120 }}
+              className="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl p-8 text-center"
             >
               <div
-                className={`w-14 h-14 rounded-lg flex items-center justify-center mb-4 ${getColorClasses(
-                  feature.color
-                )}`}
+                className={`w-16 h-16 mx-auto mb-6 rounded-full bg-gradient-to-tr ${f.gradient} flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform`}
               >
-                <feature.icon className="w-6 h-6" />
+                <f.icon className="w-7 h-7 text-white" />
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">{feature.title}</h3>
-              <p className="text-gray-600 leading-relaxed">{feature.description}</p>
+              <h3 className="text-lg font-semibold text-gray-900 mb-3">{f.title}</h3>
+              <p className="text-gray-600 text-sm leading-relaxed">{f.description}</p>
             </motion.div>
           ))}
         </div>
